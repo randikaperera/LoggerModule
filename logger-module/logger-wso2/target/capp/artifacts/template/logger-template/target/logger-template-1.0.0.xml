@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name="logger-template" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="integrationReference"/>
+    <parameter name="integrationVersion"/>
+    <parameter name="sequenceName"/>
+    <parameter name="logMessage"/>
+    <parameter name="errorReason"/>
+    <parameter name="logLevel"/>
+    <parameter name="unhandledError"/>
+    <parameter name="includeMessageBody"/>
+    <parameter name="uniVerseInfo"/>
+    <parameter name="registryPath"/>
+    <sequence>
+        <clone continueParent="true">
+            <target>
+                <sequence>
+                    <property expression="$func:integrationReference" name="integrationReference" scope="default" type="STRING"/>
+                    <property expression="$func:integrationVersion" name="integrationVersion" scope="default" type="STRING"/>
+                    <property expression="$func:sequenceName" name="sequenceName" scope="default" type="STRING"/>
+                    <property expression="$func:logLevel" name="logLevel" scope="default" type="STRING"/>
+                    <property expression="$func:unhandledError" name="unhandledError" scope="default" type="STRING"/>
+                    <property expression="$func:logMessage" name="logMessage" scope="default" type="STRING"/>
+                    <property expression="$func:errorReason" name="errorReason" scope="default" type="STRING"/>
+                    <property expression="$func:includeMessageBody" name="includeMessageBody" scope="default" type="STRING"/>
+                    <property expression="$func:uniVerseInfo" name="uniVerseInfo" scope="default" type="STRING"/>
+                    <property expression="$func:registryPath" name="registryPath" scope="default" type="STRING"/>
+                    <class name="com.cellcard.wso2.modules.LoggerMediator"/>
+                    <drop/>
+                </sequence>
+            </target>
+        </clone>
+    </sequence>
+</template>

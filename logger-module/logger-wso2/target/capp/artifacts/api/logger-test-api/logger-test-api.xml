@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/logger/test" name="logger-test-api" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" protocol="https">
+        <inSequence>
+            <!-- TEST 1: logger call with no MetaData header -->
+            <call-template description="Call: logger-template" target="logger-template">
+                <with-param name="integrationReference" value="PIM1"/>
+                <with-param name="integrationVersion" value="1.0.0"/>
+                <with-param name="sequenceName" value="test sequence"/>
+                <with-param name="includeMessageBody" value="true"/>
+                <with-param name="logMessage" value="This is a test log"/>
+                <with-param name="logLevel" value="INFO"/>
+            </call-template>
+            <!-- Create the MetaData header-->
+            <!-- <call-template description="Call: metadata-creator" target="metadata-creator-v2-template">
+                <with-param name="messageType" value="INVOICE"/>
+                <with-param name="messageVersion" value="1.0.0"/>
+                <with-param name="clientMessageId" value="11111111-2222-3333-4444-555555555555"/>
+                <with-param name="businessId" value="123456"/>
+                <with-param name="capability" value="Accounts Payable"/>
+                <with-param name="systemCode" value="CORE"/>
+                <with-param name="priority" value="MEDIUM"/>-->
+            <!--  </call-template>-->
+            <!-- TEST 2: logger INFO level call no log body argument set-->
+            <call-template description="Call: logger-template" target="logger-template">
+                <with-param name="integrationReference" value="PIM1"/>
+                <with-param name="integrationVersion" value="1.0.0"/>
+                <with-param name="sequenceName" value="test sequence"/>
+                <with-param name="logMessage" value="This is a test log"/>
+            </call-template>
+            <!-- TEST 3: logger INFO level call log body argument set to TRUE -->
+            <call-template description="Call: logger-template" target="logger-template">
+                <with-param name="integrationReference" value="PIM1"/>
+                <with-param name="integrationVersion" value="1.0.0"/>
+                <with-param name="sequenceName" value="test sequence"/>
+                <with-param name="includeMessageBody" value="true"/>
+                <with-param name="logMessage" value="This is a test log"/>
+            </call-template>
+            <!-- TEST 4: logger INFO level call log body argument set to FALSE -->
+            <call-template description="Call: logger-template" target="logger-template">
+                <with-param name="integrationReference" value="PIM1"/>
+                <with-param name="integrationVersion" value="1.0.0"/>
+                <with-param name="sequenceName" value="test sequence"/>
+                <with-param name="includeMessageBody" value="false"/>
+                <with-param name="logMessage" value="This is a test log"/>
+            </call-template>
+            <!-- TEST 5: logger ERROR level call no log body argument set-->
+            <call-template description="Call: logger-template" target="logger-template">
+                <with-param name="integrationReference" value="PIM1"/>
+                <with-param name="integrationVersion" value="1.0.0"/>
+                <with-param name="sequenceName" value="test sequence"/>
+                <with-param name="logMessage" value="This is a test error log"/>
+                <with-param name="errorReason" value="This is the cause of the error"/>
+                <with-param name="logLevel" value="ERROR"/>
+            </call-template>
+            <!-- TEST 6: logger ERROR level call log body argument set to TRUE -->
+            <call-template description="Call: logger-template" target="logger-template">
+                <with-param name="integrationReference" value="PIM1"/>
+                <with-param name="integrationVersion" value="1.0.0"/>
+                <with-param name="sequenceName" value="test sequence"/>
+                <with-param name="includeMessageBody" value="true"/>
+                <with-param name="logMessage" value="This is a test error log"/>
+                <with-param name="errorReason" value="This is the cause of the error"/>
+                <with-param name="logLevel" value="ERROR"/>
+            </call-template>
+            <!-- TEST 7: logger ERROR level call log body argument set to FALSE -->
+            <call-template description="Call: logger-template" target="logger-template">
+                <with-param name="integrationReference" value="PIM1"/>
+                <with-param name="integrationVersion" value="1.0.0"/>
+                <with-param name="sequenceName" value="test sequence"/>
+                <with-param name="includeMessageBody" value="false"/>
+                <with-param name="logMessage" value="This is a test error log"/>
+                <with-param name="errorReason" value="This is the cause of the error"/>
+                <with-param name="logLevel" value="ERROR"/>
+            </call-template>
+            <enrich>
+                <source clone="true" type="inline">
+                    <response>MESSAGE</response>
+                </source>
+                <target type="body"/>
+            </enrich>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="logger-test-api" groupId="com.cellcard.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/logger-test-api.xml</file>
+    </artifact>
+    <artifact name="logger-template" groupId="com.cellcard.template" version="1.0.0" type="synapse/sequenceTemplate" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/templates/logger-template.xml</file>
+    </artifact>
+</artifacts>
